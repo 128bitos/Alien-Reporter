@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import { DataModel } from '../model/data.model';
+import 'rxjs/add/observable/throw';
 
 //endpoint URI
 const GET_MOCKY_DATA_URI: string = environment.MOCKY_URL;
