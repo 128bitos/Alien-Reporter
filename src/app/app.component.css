@@ -1,0 +1,33 @@
+/* nav maximum height */
+nav {
+      max-height: 40px !important;
+}
+
+/* List element css */
+.cardDiv{
+      border: 1px solid #17a2b8;
+      border-radius: 5px;
+      box-shadow: 1px 1px 3px #414141;
+      width: 300px;
+      padding: 15px;
+      margin: 10px;
+}
+
+/* css apply on moving element */
+.mainDiv, .dndDragging {
+      background-color: rgb(228, 247, 250) !important;
+      border: 2px solid #111111;
+}
+
+/* Placeholder css apply on source element place when you moving the element ) */
+.dndPlaceholder {
+      display: inline-block;
+      min-height: 98px;
+}
+
+/* you can show/hide source element by this class */
+.dndDraggingSource{
+      display: none;
+}
+
+  

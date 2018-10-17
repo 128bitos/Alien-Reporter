@@ -1,0 +1,42 @@
+<!-- Project Scope
+The scope was to create SPA (single page application) that invoke the 
+(http://www.mocky.io/v2/59f7760a2f0000ab1d55864e)  JSON endpoint and display the form Id, 
+last changed date and last changed by at the top of the page, then display the list of all 
+the elements in the form array with drag and drop capability.
+
+To achieve that I developed this application in Angular 5.2, create the service / interceptor 
+to parse the data from provided endpoint and used the Reactive Form approach to create the form array. 
+To get drag and drop capability I installed  the npm ng2-dnd-list 
+package (https://www.npmjs.com/package/@fjsc/ng2-dnd-list) and applied the  dndDraggable / 
+dndList directives  -->
+
+<!-- Top Bar Started -->
+<nav class="navbar navbar-info bg-info text-white">
+    <span>
+        Last Changed by :
+        <strong>{{dataModel.lastChangedBy | titlecase}}</strong> on {{dataModel.lastChangedDate | date}}
+    </span>
+</nav>
+<!-- Top Bar Ended -->
+
+<!-- Main Container Started -->
+<div class="container " *ngIf="dataFormGroup">
+    <h5 class="mt-3 text-center">Form ID: {{dataModel.formId}}</h5>
+    <hr/>
+    <!-- This is dropzone div (dndList directive is used here) -->
+    <div [(dndList)]="dataFormGroup.controls.formList.value" class=".mainDiv mt-4" 
+    (dndDrop)="getdroppedItemIndex($event, dataFormGroup.controls.formList.value)">
+        <!-- This is draggable div (dndDraggable directive is used here to make element list draggable) -->
+        <div *ngFor="let item of dataFormGroup.controls.formList.value; let i = index;" 
+            class="cardDiv mx-auto" [dndDraggable]="item" dndEffectAllowed="move" 
+            (dndMoved)="itemMoved(i, dataFormGroup.controls.formList.value)" (dndSelected)="selected = item"
+            [ngClass]="{'selected': selected === item}">
+            <strong>ID:</strong> {{item.id}}
+            <br/>
+            <strong>Caption:</strong> {{item.caption}}
+            <br/>
+            <strong>Type:</strong> {{item.type}}
+        </div>
+    </div>
+</div>
+<!-- Main Container Ended -->
